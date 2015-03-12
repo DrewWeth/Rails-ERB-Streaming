@@ -1,8 +1,6 @@
-== Manual ERB Rendering and Html Streaming
+== Manual Page Rendering and Streaming HTML (PRSH)
 
-### Manual Page Rendering and Streaming HTML (PRSH)
-
-#### What is it?
+=== What is it?
 PRSH is caching your ERB views, then when called to be rendered, you manually parse the file (line by line?) and render the HTML. You then use <tt>ActionController::Live</tt> to send that chunk of HTML to the client. You then repeat the process until the entire HTML has been rendered. This is optimized with "multi-threading." Rails doesn't have true multi-threading since it sets a virtual machine block, but the Kernel is smart enough to release the block during I/O (when data is being transferred to/from the client). During this time, you can render HTML from your ERB file and prepare for another transfer.
 
 The alteration between prepping and transfer stages allows you to take advantage of your machine.
