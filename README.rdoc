@@ -1,28 +1,20 @@
-== README
+== Manual ERB Rendering and Html Streaming
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Manual Page Rendering and Streaming HTML (PRSH)
 
-Things you may want to cover:
+#### What is it?
+PRSH is caching your ERB views, then when called to be rendered, you manually parse the file (line by line?) and render the HTML. You then use <tt>ActionController::Live</tt> to send that chunk of HTML to the client. You then repeat the process until the entire HTML has been rendered. This is optimized with "multi-threading." Rails doesn't have true multi-threading since it sets a virtual machine block, but the Kernel is smart enough to release the block during I/O (when data is being transferred to/from the client). During this time, you can render HTML from your ERB file and prepare for another transfer.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The alteration between prepping and transfer stages allows you to take advantage of your machine.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Why is this beneficial?
+
+* Super fast page load speeds - without waiting for a database call or rendering you can immediately send javascript get started on asynchronously grabbing your assets.
+
+* Small buffer sizes - the entire rendered html doesn't have to be saved until sent. You can send small parts continually.
+
+* Allows for server-sent events - you can easily send data from your server to clients whenever you want. So much possibility.
+
+
+Live example: https://fast-rails.herokuapp.com/
