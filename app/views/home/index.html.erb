@@ -1,3 +1,5 @@
 <h1>Live</h1>
 
-<div><%= @welcome %></div>
+<div>hello <%= @welcome %></div>
+
+<% @logs.each do |l| %><div><%= l.url %> - <%= l.created_at %></div><% end %>

@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @request_log.url %>
+</p>
+
+<%= link_to 'Edit', edit_request_log_path(@request_log) %> |
+<%= link_to 'Back', request_logs_path %>
