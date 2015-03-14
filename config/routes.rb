@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :dreams
+
   resources :request_logs
 
   root 'home#index'

@@ -1,0 +1,29 @@
+<h1>Listing dreams</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Timeline</th>
+      <th>Completed</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dreams.each do |dream| %>
+      <tr>
+        <td><%= dream.content %></td>
+        <td><%= dream.timeline %></td>
+        <td><%= dream.completed %></td>
+        <td><%= link_to 'Show', dream %></td>
+
+        <td><%= link_to 'Destroy', dream, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Create Dreami', new_dream_path %>

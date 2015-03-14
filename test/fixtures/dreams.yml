@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyString
+  timeline: 2015-03-13 23:44:14
+  completed: 
+
+two:
+  content: MyString
+  timeline: 2015-03-13 23:44:14
+  completed: 

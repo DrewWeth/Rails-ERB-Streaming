@@ -1,43 +1,33 @@
+require 'reloader'
+
 class HomeController < ApplicationController
+
   include ActionController::Live
-  require "#{Rails.root}/app/models/MyERB.rb"
-  # around_action :set_site
-
-  def set_site
-    # @a = Thread.new{ self.index }
-    # response.
-
-  end
 
   def index
+    # SSE expects the `text/event-stream` content type
+    response.headers['Content-Type'] = 'text/event-stream'
 
-    # Thread.new { home.index }
-    # res.stream.await
-    # [res.status, res.headers, res.stream]
-    script = "<script type='text/javascript'>console.log('testing script')</script>"
-    response.stream.write script
+    sse = Reloader::SSE.new(response.stream)
 
-    @logs = RequestLog.take(100)
-    @welcome = "world"
-    # response.stream.write ''
-    File.readlines("#{Rails.root}/app/views/home/index.html.erb").each do |line|
-      begin
-        doc = ERB.new(line, nil, nil, "temp").result(binding)
-        p doc
-        response.stream.write doc
-      rescue e
-        p e
+    begin
+      directories = [
+        File.join(Rails.root, 'app', 'assets'),
+        File.join(Rails.root, 'app', 'views'),
+      ]
+      fsevent = FSEvent.new
+
+      # Watch the above directories
+      fsevent.watch(directories) do |dirs|
+        # Send a message on the "refresh" channel on every update
+        sse.write({ :dirs => dirs }, :event => 'refresh')
       end
+      fsevent.run
+
+    rescue IOError
+      # When the client disconnects, we'll get an IOError on write
+    ensure
+      sse.close
     end
-    response.stream.close
-    RequestLog.create(:url => request.original_url)
-  end
-
-end
-
-class Line
-  attr_accessor :line
-  def initialize
-    @line
   end
 end
