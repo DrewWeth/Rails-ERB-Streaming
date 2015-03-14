@@ -5,6 +5,9 @@ class HomeController < ApplicationController
   include ActionController::Live
 
   def index
+  end
+
+  def update
     # SSE expects the `text/event-stream` content type
     response.headers['Content-Type'] = 'text/event-stream'
 
