@@ -10,6 +10,12 @@ jQuery(document).ready(function() {
       window.location.reload();
     });
 
+    source.addEventListener('notification', function(e) {
+      console.log("LOGS UPDATED!");
+      console.log(e);
+
+    });
+
     source.addEventListener('open', function() {
       console.log("Connected");
 

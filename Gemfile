@@ -11,6 +11,13 @@ group :production do
   gem 'pg'
 end
 
+gem 'quiet_assets', group: :development
+
+gem 'devise'
+gem 'authority'
+gem 'rolify'
+
+
 gem 'redis-rails'
 
 gem 'puma'

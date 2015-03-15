@@ -26,8 +26,15 @@ class DreamsController < ApplicationController
   def create
     @dream = Dream.new(dream_params)
 
+    redis = Redis.new
+
     respond_to do |format|
       if @dream.save
+        redis.sadd(current_user.id, @dream.to_s)
+
+        pub = redis.publish :test, { object: @dream}
+        puts "Publish count (#{pub})"
+
         format.html { redirect_to @dream, notice: 'Dream was successfully created.' }
         format.json { render :show, status: :created, location: @dream }
       else

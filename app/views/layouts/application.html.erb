@@ -7,19 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
- <script>
-// jQuery(document).ready(function(){
-//   setTimeout(function(){
-//     var source = new EventSource('/control');
-//
-//     source.addEventListener('reload', function(e){
-//       window.location.reload();
-//     })
-//   }, 1);
-// })
-// </script>
-
+<%= link_to 'Home', root_path %> <%= link_to 'Dreams', dreams_path %> <%= link_to current_user.try(:email) || 'Sign In', new_user_session_path %>
 <%= yield %>
+
+<hr>
+
 
 </body>
 </html>

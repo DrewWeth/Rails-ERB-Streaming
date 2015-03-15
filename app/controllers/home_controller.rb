@@ -5,29 +5,29 @@ class HomeController < ApplicationController
   include ActionController::Live
 
   def index
-
   end
 
   def update
+    redis = Redis.new
+
     # SSE expects the `text/event-stream` content type
     response.headers['Content-Type'] = 'text/event-stream'
 
     sse = Reloader::SSE.new(response.stream)
 
     begin
-      directories = [
-        File.join(Rails.root, 'app', 'assets'),
-        File.join(Rails.root, 'app', 'views'),
-      ]
-      fsevent = FSEvent.new
+      redis.subscribe(:test) do |on|
 
-      # Watch the above directories
-      fsevent.watch(directories) do |dirs|
-        # Send a message on the "refresh" channel on every update
-        sse.write({ :dirs => dirs }, :event => 'refresh')
+        on.subscribe do |channel, subscriptions|
+          puts "Subscribed to ##{channel} (#{subscriptions} subscriptions)"
+        end
+
+        on.message do |channel, message|
+          puts "In message"
+          puts "##{channel} - #{message}"
+          sse.write({ data: message }, :event => "notification")
+        end
       end
-      fsevent.run
-
     rescue IOError
       # When the client disconnects, we'll get an IOError on write
     ensure
