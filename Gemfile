@@ -11,6 +11,8 @@ group :production do
   gem 'pg'
 end
 
+gem 'redis-rails'
+
 gem 'puma'
 gem 'rb-fsevent'
 

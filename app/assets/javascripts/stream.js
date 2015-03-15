@@ -3,7 +3,7 @@ jQuery(document).ready(function() {
   setTimeout(function() {
     console.log("In Timeout");
 
-    var source = new EventSource('/');
+    var source = new EventSource('/update');
 
     source.addEventListener('refresh', function() {
       console.log("Reloading");
