@@ -16,12 +16,19 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+<<<<<<< HEAD
   <div id="main" class="container">
 <%= link_to 'Home', root_path %> <%= link_to 'Dreams', dreams_path %> <%= link_to current_user.try(:email) || 'Sign In', new_user_session_path %>
+=======
+  <%= link_to 'Home', root_path %> <%= link_to 'Dreams', dreams_path %>
+
+>>>>>>> df52fdd0b74e2e8ff745028a9ce3370d08352835
 <%= yield %>
 </div>
 <hr>
 
 
+
+<div id="sse"></div>
 </body>
 </html>

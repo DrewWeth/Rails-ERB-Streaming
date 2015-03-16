@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get 'update' => 'home#update'
+<<<<<<< HEAD
+=======
+
+>>>>>>> df52fdd0b74e2e8ff745028a9ce3370d08352835
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
