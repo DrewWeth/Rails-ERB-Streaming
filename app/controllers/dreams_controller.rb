@@ -32,7 +32,7 @@ class DreamsController < ApplicationController
       if @dream.save
         redis.sadd(current_user.id, @dream.to_s)
 
-        pub = redis.publish :test, { object: @dream}
+        pub = redis.publish :test, { object: @dream.content.to_json}
         puts "Publish count (#{pub})"
 
         format.html { redirect_to @dream, notice: 'Dream was successfully created.' }
