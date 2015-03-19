@@ -1,7 +1,5 @@
 jQuery(document).ready(function() {
-  console.log("Here");
   setTimeout(function() {
-    console.log("In Timeout");
 
     var source = new EventSource('/update');
 
@@ -14,9 +12,10 @@ jQuery(document).ready(function() {
     });
 
     source.addEventListener('message', function(e) {
-      console.log("MESSAGE METHOD:" + e);
-
-      console.log("Connected");
+      var res = JSON.parse(e.data);
+      console.log(res);
+      var date = new Date();
+      $('#bottom').prepend("<p style='background:#"+ res["color"] +"'>" + res["message"] + "<span class='timestamp'>"+ date.getUTCHours() +":"+date.getUTCMinutes() +"</span></p>");
     });
 
     source.addEventListener('notification', function(e) {

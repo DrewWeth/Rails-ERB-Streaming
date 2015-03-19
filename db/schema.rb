@@ -11,12 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315014824) do
+ActiveRecord::Schema.define(version: 20150319052746) do
 
   create_table "dreams", force: true do |t|
     t.string   "content"
     t.datetime "timeline"
     t.boolean  "completed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", force: true do |t|
+    t.string   "message"
+    t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

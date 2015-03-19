@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :messages
+
   devise_for :users
   resources :dreams
 
@@ -6,7 +8,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get 'update' => 'home#update'
-
+  post 'home/submit' => 'home#submit'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

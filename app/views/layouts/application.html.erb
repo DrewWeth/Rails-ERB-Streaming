@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Live</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <head>
+    <title>Live</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 
-  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+      <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-</head>
-<body>
-  <div id="main" class="container">
-<%= link_to 'Home', root_path %> <%= link_to 'Dreams', dreams_path %> <%= link_to current_user.try(:email) || 'Sign In', new_user_session_path %>
-<%= yield %>
-</div>
-<hr>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div id="main" class="container">
+      <%= link_to 'Home', root_path %> <%= link_to 'Dreams', dreams_path %> <%= link_to current_user.try(:email) || 'Sign In', new_user_session_path %>
+      <%= yield %>
+    </div>
 
+    <hr>
 
-
-<div id="sse"></div>
-</body>
+    <div id="sse"></div>
+  </body>
 </html>

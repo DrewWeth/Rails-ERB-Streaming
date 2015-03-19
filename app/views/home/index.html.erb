@@ -1,5 +1,67 @@
 <h1>Striker</h1>
 
-<div>hello <%= @welcome %></div>
+
+<style>
+.convo{
+  background: #EEE;
+  height:300px;
+
+  position:relative;
+  overflow:scroll;
+}
+.convo p{
+  margin-bottom:3px;
+  padding-left:5px;
+}
+
+p .timestamp{
+  position:absolute;
+  right:0px;
+
+  color:#aaa;
+  padding-right:5px;
+
+}
+
+#bottom {
+  margin-bottom:1px;
+}
+</style>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <form id="submit_form">
+        <input id="message_text" type="text" class="form-control" placeholder="Message" />
+      </form>
+    </div>
+    <div class="col-sm-8">
+      <div id="convo" class="convo">
+        <div id="bottom">
+          <% @messages.each do |m| %>
+            <p style="background:#<%= m.color %>"><%= m.message %><span class="timestamp"><%= m.created_at.strftime("%H:%M") %></span></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$('#submit_form').submit(function(e){
+  var message = $('#message_text');
+
+  $.ajax({
+    url: "/home/submit",
+    method: 'post',
+    data: { message: message.val() },
+    context: message.val()
+  });
+
+  message.val('');
+  return false;
+})
+</script>
 
 <%= @redis_logs %>
